@@ -3,8 +3,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-storiesOf('Login/GameSelector', module)
+storiesOf('Pages/Login', module)
 
 .add('welcome', () => {
-	return <div>welcome to rpgchat</div>
+  return <div>welcome to rpgchat</div>
 })

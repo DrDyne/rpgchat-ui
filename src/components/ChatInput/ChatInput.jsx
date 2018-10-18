@@ -1,7 +1,8 @@
 import React from 'react'
+import Box, { Button, Input } from '../../theme'
 
-const Input = props => <input {...props} />
-const SendButton = props => <button {...props}>send</button>
+const InputField = props => <Input {...props} />
+const SendButton = props => <Button {...props}>send</Button>
 
 class ChatInput extends React.Component {
   state = {
@@ -34,10 +35,10 @@ class ChatInput extends React.Component {
       }
     }
 
-    return <div>
-      <Input {...inputProps} />
+    return <Box>
+      <InputField {...inputProps} />
       <SendButton {...buttonProps} />
-    </div>
+    </Box>
   }
 }
 

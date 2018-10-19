@@ -8,6 +8,7 @@
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
+    "sockette": "^2.0.0",
     "styled-components": "^4.0.0"
   },
   "scripts": {
@@ -17,8 +18,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public ",
     "build-storybook": "build-storybook -s public -o docs/",
-		"precommit": "npm run lint",
-		"lint": "eslint --fix src/"
+    "precommit": "npm run lint",
+    "lint": "eslint --fix src/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,12 +31,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/core": "^7.1.2",
     "@storybook/addon-actions": "^4.0.0-alpha.25",
     "@storybook/addon-knobs": "^3.4.11",
-    "@storybook/react": "^4.0.0-alpha.25",
     "@storybook/addon-links": "^4.0.0-alpha.25",
     "@storybook/addons": "^4.0.0-alpha.25",
-    "@babel/core": "^7.1.2",
+    "@storybook/react": "^4.0.0-alpha.25",
     "babel-loader": "^8.0.4"
   }
 }

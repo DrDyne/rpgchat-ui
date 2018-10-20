@@ -21,9 +21,3 @@ storiesOf('Websocket', module)
 .addDecorator(withKnobs)
 
 .add('test connection', () => <Websocket {...actions} createSocket={(url, options) => new Sockette(url, options)} />)
-.add('test message', () => {
-  return <Websocket {...actions} onmessage={({type, message, name, color}) => {
-    console.log(type, message, name, color)
-  }} />
-})
-

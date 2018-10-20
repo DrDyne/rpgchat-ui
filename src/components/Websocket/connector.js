@@ -1,6 +1,12 @@
 import { connect } from 'react-redux'
 import Sockette from 'sockette'
-import { receivedMessage, socketConnected, socketClosed } from '../actions'
+
+import { 
+  receivedMessage, 
+  socketClosed 
+  socketConnected, 
+  socketCreated, 
+} from '../actions'
 
 const mapDispatchToProps = dispatch => ({
   createSocket: (url, options) => {

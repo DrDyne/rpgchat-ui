@@ -1,7 +1,7 @@
-import React from 'react'
+import styled from 'styled-components'
 
-export const Box = ({children, ...props}) => <div {...props}>{ children }</div>
-export const Input = props => <input {...props} />
-export const Button = ({children, ...props}) => <button {...props}>{ children }</button>
+export const Box = styled.div``
+export const Input = styled.input``
+export const Button = styled.button``
 
 export default Box

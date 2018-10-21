@@ -11,6 +11,7 @@ const GameChat = ({
   onChange,
   onKeyPress,
   onSend,
+  sendMessage,
 }) => {
   const outputProps = {
     messages,
@@ -22,6 +23,7 @@ const GameChat = ({
     onChange,
     onKeyPress,
     onSend,
+    sendMessage,
   }
 
   return (

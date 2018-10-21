@@ -1,20 +1,36 @@
 import { combineReducers } from 'redux'
 
 export const SCENE_SET = 'SCENE/SET'
+
 export const SOCKET_CLOSED = 'WS/CLOSED'
 export const SOCKET_CONNECTED = 'WS/CONNECTED'
 export const SOCKET_CREATED = 'WS/CREATED'
 export const SOCKET_MESSAGE_RECEIVED = 'WS/MESSAGE/RECEIVED'
 export const SOCKET_SEND = 'WS/SEND'
 
-const initialState = {
-  sceneId: 0,
-  ws: null,
-  isSocketReady: true,
-  messageHistory: [],
+const initialStates = {
+  chatLog: {
+    ws: null,
+    isSocketReady: true,
+    messageHistory: [],
+  },
+  scene: {
+    id: 0,
+    name: undefined,
+  }
 }
 
-export const chatLog = (state=initialState, action) => {
+export const scene = (state=initialStates.scene, action) => {
+  switch(action.type) {
+    case SCENE_SET: {
+      const { sceneId } = action
+      return { ...state, sceneId }
+    }
+  }
+  return state
+}
+
+export const chatLog = (state=initialStates.chatLog, action) => {
   switch(action.type) {
     case SOCKET_CREATED: {
       const { ws } = action
@@ -41,14 +57,11 @@ export const chatLog = (state=initialState, action) => {
       return state
     }
 
-    case SCENE_SET: {
-      const { sceneId } = action
-      return { ...state, sceneId }
-    }
   }
   return state
 }
 
 export default combineReducers({
-  chatLog
+  chatLog,
+  scene
 })

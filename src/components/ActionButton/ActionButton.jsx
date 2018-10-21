@@ -1,8 +1,8 @@
 import React from 'react'
-import Box from '../../theme'
+import { Button } from '../../theme'
 
 const ActionButton = ({onClick, command}) => (
-  <Box onClick={onClick}>{ command.name }</Box>
+  <Button onClick={onClick}>{ command.name }</Button>
 )
 
 ActionButton.defaultProps = {

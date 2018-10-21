@@ -8,7 +8,7 @@ import {
   socketCreated, 
 } from '../actions'
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   createSocket: (url, options) => {
     const ws = new Sockette(url, options)
     dispatch(socketCreated(ws)) // save ws instance in store

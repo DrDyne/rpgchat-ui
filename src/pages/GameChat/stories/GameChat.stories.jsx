@@ -16,3 +16,33 @@ storiesOf('Pages/GameChat', module)
 .addDecorator(withKnobs)
 
 .add('default', () => <GameChat {...defaultProps} />)
+.add('demo messages', () => {
+  class DemoGameChat extends React.Component {
+    state = {
+      messages: [],
+    }
+
+    render () {
+      return (
+        <GameChat 
+          {...defaultProps} 
+          sendMessage={content => {
+            const newMessage = {
+              author: 'storybook',
+              content: content,
+              time: this.state.messages.length
+            }
+            this.setState({
+              messages: [ ...this.state.messages, newMessage ]
+            })
+          }}
+          showAuthor={boolean('show author?', true)}
+          onSend={action('message sent')}
+          {...this.state}
+        />
+      )
+    }
+  }
+
+  return <DemoGameChat />
+})

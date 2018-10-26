@@ -3,15 +3,16 @@ import Sockette from 'sockette'
 
 import { 
   receivedMessage, 
-  socketClosed 
+  socketClosed,
   socketConnected, 
   socketCreated, 
-} from '../actions'
+} from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
   createSocket: (url, options) => {
     const ws = new Sockette(url, options)
     dispatch(socketCreated(ws)) // save ws instance in store
+    return ws
   },
   onmessage: data => dispatch(receivedMessage(data)),
   onopen: data => {

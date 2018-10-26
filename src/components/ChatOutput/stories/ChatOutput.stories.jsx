@@ -83,8 +83,7 @@ storiesOf('Components/ChatOutput', module)
     }, {
       type: 'roll',
       author: 'player2',
-      content: '[2d6 +1] + [3d4] = 15',
-      details: '[2d6 +1] + [3d4] = [3+2 +1] + [1+3+4+1] = 15'
+      content: '[2d6 +1] + [3d4] = [3+2 +1] + [1+3+4+1] = 15' // example details
     }]
   }
 

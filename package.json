@@ -10,7 +10,8 @@
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
     "sockette": "^2.0.0",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.0.2",
+    "ws": "^6.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,7 +21,8 @@
     "storybook": "start-storybook -p 9009 -s public ",
     "build-storybook": "build-storybook -s public -o docs/",
     "precommit": "npm run lint",
-    "lint": "eslint --fix src/"
+    "lint": "eslint --fix src/",
+    "ws": "node ./ws.js"
   },
   "eslintConfig": {
     "extends": "react-app"

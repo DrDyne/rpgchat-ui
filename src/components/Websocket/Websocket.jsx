@@ -1,13 +1,19 @@
 import React from 'react'
 
 export default class Websocket extends React.Component {
+  state = {
+    ws: null
+  }
+
   componentDidMount() {
     const {createSocket, url, timeout, ...handlers} = this.props
-    this.ws = createSocket(url, {timeout, ...handlers})
+    const ws = createSocket(url, {timeout, ...handlers})
+    this.setState({ws})
   }
 
   componentWillUnmount() {
-    if ( this.ws ) this.ws.close()
+    const { ws } = this.state
+    if (ws) ws.close()
   }
 
   render () { return null }

@@ -5,7 +5,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  sendMessage: f => f,
+  send: f => f,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)

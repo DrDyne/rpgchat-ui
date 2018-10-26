@@ -9,7 +9,7 @@ const actions = {
   onChange: action('value changed'),
   onKeyPress: action('key press'),
   onSend: action('send'),
-  sendMessage: action('send message'),
+  send: action('send message'),
 }
 
 const defaultProps = {

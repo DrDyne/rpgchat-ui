@@ -27,7 +27,9 @@ storiesOf('Pages/GameChat', module)
     render () {
       const socketProps = {
         createSocket: (url, options) => {
-          this.setState({ws: new Sockette(url, options)})
+          const ws = new Sockette(url, options)
+          this.setState({ws})
+          return ws
         },
         onmessage: event => {
           const { ws, messages } = this.state
@@ -35,7 +37,6 @@ storiesOf('Pages/GameChat', module)
 
           const { data } = event
           const message = JSON.parse(data)
-          console.log(event, message, this.state)
           this.setState({ messages: [ ...messages, message ] })
         }
       }
@@ -43,7 +44,7 @@ storiesOf('Pages/GameChat', module)
       const gameChatProps = {
         ...defaultProps,
         messages: this.state.messages,
-        sendMessage: content => {
+        send: content => {
           const { ws } = this.state
           const message = {
             author: 'storybook',

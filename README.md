@@ -4,3 +4,8 @@ ui app for rpgchat backend
 __rpgchat server__ can be found at this address: [https://github.com/loopywolf/rpgchat](https://github.com/loopywolf/rpgchat)
 
 __storybook__ available [https://drdyne.github.io/rpgchat-ui](https://drdyne.github.io/rpgchat-ui) 
+
+# Interface
+
+![Alt text](design/rpgchat-ui layout.png?raw=true "layout")
+

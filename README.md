@@ -7,5 +7,5 @@ __storybook__ available [https://drdyne.github.io/rpgchat-ui](https://drdyne.git
 
 # Interface
 
-![Alt text](design/rpgchat-ui layout.png?raw=true "layout")
+![Layout](design/rpgchat-ui layout.png?)
 

@@ -9,4 +9,6 @@ __storybook__ available [https://drdyne.github.io/rpgchat-ui](https://drdyne.git
 
 ![Layout](/design/rpgchat-ui-showcase.png)
 
+![Theme](/design/rpgchat-ui-theme.png)
+
 ryc

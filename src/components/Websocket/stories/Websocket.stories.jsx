@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, number } from '@storybook/addon-knobs'
 
 import Sockette from 'sockette'
-import Websocket from '../'
+import Websocket from '../Websocket'
 
 const actions = {
   onopen: action('open'),

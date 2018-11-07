@@ -1,8 +1,20 @@
 import React from 'react'
-import Box, { Button, Input } from '../../theme'
+import Box, { styled, colors, Button, Input } from '../../theme'
 
-const InputField = props => <Input {...props} />
-const SendButton = props => <Button {...props}>send</Button>
+const ChatInputBox = styled(Box)`
+  background: ${colors.secondary};
+  width: 100%;
+`
+
+const InputField = styled(Input)`
+  display: flex;
+  flex-grow: 1;
+  font-size: 36px;
+  border: none;
+  height: 78px;
+  padding: 22px 19px;
+  background: transparent;
+`
 
 class ChatInput extends React.Component {
   state = {
@@ -14,6 +26,9 @@ class ChatInput extends React.Component {
     // roll: "!roll 1d4"  "!roll 1d4+1 1d6+2" "!!roll 1d4+1"
     // whisper: "@playername whisper something." 
     // say: "everybody can hear me"
+    const isCommand = !!message.match(/^(!?[!@#]\w+)(.*)/) 
+    if ( !isCommand ) return null
+
     const [command, content] = message.match(/^(!?[!@#]\w+)(.*)/) 
 
     if ( '!roll' === command ) { // dice roll "!roll 1d4 2d4+2"
@@ -35,18 +50,21 @@ class ChatInput extends React.Component {
   send () {
     const { message } = this.state
     const { send, onSend, clearOnSend } = this.props
-    const command = this.parseCommand(message)
-    console.log(command)
+    //const command = this.parseCommand(message) // TODO no command parsing for now, just chat
+    console.log(message)
 
-    send(command)
+    send(message)
     onSend(message)
     if ( clearOnSend ) this.setState({message: ''})
   }
 
   render () {
     const { message } = this.state
+    const { defaultValue } = this.props
+
     const inputProps = { 
       value: message,
+      defaultValue,
       onChange: event => {
         const {onChange} = this.props
         this.setState({message: event.target.value})
@@ -70,17 +88,9 @@ class ChatInput extends React.Component {
       }
     }
 
-    const buttonProps = { 
-      onClick: () => {
-        if ( !message.length ) return;
-        this.send()
-      }
-    }
-
-    return <Box>
+    return <ChatInputBox>
       <InputField {...inputProps} />
-      <SendButton {...buttonProps} />
-    </Box>
+    </ChatInputBox>
   }
 }
 
@@ -93,6 +103,7 @@ ChatInput.defaultProps = {
   clearOnSend: true,
   onHistoryPrevious: f => f,
   onHistoryNext: f => f,
+  defaultValue: 'Talk in #local',
 }
 
 export default ChatInput

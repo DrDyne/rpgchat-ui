@@ -8,20 +8,38 @@ import Sockette from 'sockette'
 import WebSocket from '../../../components/Websocket/Websocket'
 import GameChat from '../GameChat'
 
+import Box, { styled, Input } from '../../../theme'
+
+const withDemoBox = story => {
+  const DemoBox = styled(Box)`
+    * { 
+      width: 100%;
+      flex-direction: column;
+    }
+
+    ${Input} {
+      font-size: 36px;
+    }
+  `
+
+  return <DemoBox>{story()}</DemoBox>
+}
+
 const defaultProps = {
   onClickContent: action('clicked content'),
   onClickAuthor: action('clicked author'),
-  messages: [{content: 'hello', author: 'storybook'}],
 }
 
 storiesOf('Pages/GameChat', module)
 .addDecorator(withKnobs)
+.addDecorator(withDemoBox)
 
 .add('default', () => <GameChat {...defaultProps} />)
 .add('demo messages', () => {
   class DemoGameChat extends React.Component {
     state = {
-      messages: [],
+      ws: null,
+      messages: [{content: 'logged in as Storybook'}],
     }
 
     render () {
@@ -47,7 +65,7 @@ storiesOf('Pages/GameChat', module)
         send: content => {
           const { ws } = this.state
           const message = {
-            author: 'storybook',
+            author: 'Storybook',
             content: content,
             time: this.state.messages.length
           }

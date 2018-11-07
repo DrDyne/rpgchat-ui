@@ -53,37 +53,54 @@ storiesOf('Components/ChatOutput', module)
       type: 'GM',
       author: 'WOWF',
       content: 'Hello, this is your GM speaking.',
+      playerColorId: 0,
     }, {
-      type: 'player',
       author: 'player1',
-      content: 'Hello, my character name is "player1", how does that sound?',
+      content: 'Hello, this is Bobby speaking...',
+      playerColorId: 1,
     }, {
-      type: 'scene',
-      content: 'The darkness around you grows heavier...',
-    }, {
-      type: 'whisper',
-      author: 'player1',
-      to: 'player2',
-      content: "let's flank them, you go right and i take left!",
-    }, {
-      type: 'whisper',
-      author: 'GM',
-      to: 'player1',
-      content: "Can you remind me about your STR stat?",
-    }, {
-      type: 'whisper',
-      author: 'player1',
-      to: 'GM',
-      content: 'My STR score is 18, counting bonuses from my currently equipped weapon',
-    }, {
-      type: 'roll',
-      author: 'player1',
-      content: '[1d6 +4] + [1d12 +1] = 8',
-      details: '[1d6 +4] + [1d12 +1] = [1+4] + [2+1] = 8',
-    }, {
-      type: 'roll',
       author: 'player2',
-      content: '[2d6 +1] + [3d4] = [3+2 +1] + [1+3+4+1] = 15' // example details
+      content: 'Hello, this is Jane speaking...',
+      playerColorId: 2,
+    }, {
+      author: 'player3',
+      content: 'rolled 9', // WIP display .result instead, and remove .content
+      result: 9,
+      dice: [{type: 'd4', qty: 1, mod: 2, total: 3}, {type: 'd8', qty: 1, total: 6}],
+      type: 'roll',
+      playerColorId: 3,
+    }, {
+      author: 'player1',
+      content: 'rolled 35', // WIP display .result instead, and remove .content
+      result: 35,
+      dice: [{type: 'd6', qty: 8, mod: 8, total: 35}],
+      type: 'roll',
+      playerColorId: 1,
+    }, {
+      author: 'player1',
+      content: 'Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking... Hello, this is Bobby speaking...  Hello, this is Bobby speaking... Hello, this is Bobby speaking...',
+      playerColorId: 1,
+    }, {
+      type: 'system',
+      content: 'Connected to WOWF as Player3',
+    }, {
+      type: 'system',
+      content: 'Welcome Player4 (123.123.123.123 connected)'
+    }, {
+      type: 'whisper',
+      author: 'Storybook',
+      dest: 'player-123',
+      content: 'Hello "player-123", only you and I can read this.',
+    }, {
+      type: 'whisper',
+      author: 'Storybook',
+      dest: 'player-234',
+      content: 'Hello "player-234", only you and I can read this.',
+    }, {
+      type: 'whisper',
+      author: 'Storybook',
+      dest: 'player-XXX',
+      content: 'Hello "player-XXX", only you and I can read this.',
     }]
   }
 

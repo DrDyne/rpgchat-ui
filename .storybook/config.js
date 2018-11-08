@@ -10,7 +10,7 @@ function loadStories() {
 
 addDecorator(story =>
   <div>
-    <GlobalStyle />
+    <GlobalStyle storybook={true} />
     {story()}
   </div>
 )

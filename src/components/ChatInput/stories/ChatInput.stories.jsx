@@ -15,7 +15,13 @@ const actions = {
 const defaultProps = {
 }
 
+const withSticky = story =>
+  <div style={{position: 'fixed', bottom: 0, width: '100%'}}>
+    {story()}
+  </div>
+
 storiesOf('Components/ChatInput', module)
+.addDecorator(withSticky)
 
 .add('default', () => <ChatInput {...actions} {...defaultProps} />)
 

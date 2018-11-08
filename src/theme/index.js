@@ -10,8 +10,9 @@ export const colors = {
   secondary: '#43454b',
   inactive: '#4B4D52',
   active: '#808185',
+  diceroll: '#A2E8FF',
   muted: '#4D4F54',
-  mutedLight: '#75767A',
+  mutedlight: '#75767A',
   players: {
     0: '#DD3939', // red GM
     1: '#EDAF06', // corn
@@ -45,7 +46,8 @@ export const Button = styled.button``
 export const GlobalStyle = createGlobalStyle`
   @import url("https://fonts.googleapis.com/css?family=Open+Sans");
   body {
-    background: ${colors.main};
+    background: ${props => props.storybook ? colors.main : colors.secondary };
+    
     ${typography.body};
   }
 `

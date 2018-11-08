@@ -1,72 +1,94 @@
 import React from 'react'
 import Box, { styled, colors, Button, Input } from '../../theme'
+//import { parseCommand } from './chat-commands'
 
-const ChatInputBox = styled(Box)`
-  background: ${colors.secondary};
-  width: 100%;
+const ActivityTrackerBox = styled(Box)`
+  color: ${colors.active};
+  justify-content: space-between;
+  padding: .5em 24px;
+  background: rgba(57, 59, 65, 0.3); // TODO colors.main with opacity 30%
+  margin-bottom: 4px;
 `
 
-const InputField = styled(Input)`
+const ActivityTracker = styled(Box)`
+`
+const CurrentTime = styled(Box)`
+`
+
+const InputFieldBox = styled(Box)`
+  width: 100%;
+  height: 78px;
+`
+
+const InputField = styled.textarea`
+  resize: none;
+  overflow: hidden;
+  &:focus { outline: none; }
+
+  color: ${colors.active};
   display: flex;
   flex-grow: 1;
-  font-size: 36px;
+  font-size: 28px;
   border: none;
-  height: 78px;
-  padding: 22px 19px;
+  padding: 22px 19px 22px 0;
   background: transparent;
+  ${props => props.isEmpty && `opacity: 0.4;`}
+`
+
+const Dot = styled.div`
+  display: flex;
+  align-self: center;
+  height: 8px;
+  width: 8px;
+  margin: 0 20px;
+  border-radius: 8px;
+  background: ${props => props.isActive ? '#808185' : 'red'};
 `
 
 class ChatInput extends React.Component {
   state = {
-    message: '',
+    mode: 'text', // text, dice, whisper
+    message: undefined,
+    whisperTo: null,
   }
 
-  parseCommand(message) {
-    // available command types:
-    // roll: "!roll 1d4"  "!roll 1d4+1 1d6+2" "!!roll 1d4+1"
-    // whisper: "@playername whisper something." 
-    // say: "everybody can hear me"
-    const isCommand = !!message.match(/^(!?[!@#]\w+)(.*)/) 
-    if ( !isCommand ) return null
+  input = null
 
-    const [command, content] = message.match(/^(!?[!@#]\w+)(.*)/) 
-
-    if ( '!roll' === command ) { // dice roll "!roll 1d4 2d4+2"
-      const die = message.match(/\d+d\d+(\+\d+)?/g)
-      return { ...message, type: 'roll', die, }
-    }
-
-    if ( /^@\w+/.test(command) ) { // whisper "@player2 hello player2."
-      const [to,] = message.match(/^@\w+/)
-      return { ...message, type: 'whisper', to, }
-    }
-
-    //TODO admin commands
-    //if ( '/slap' === command ) ...
-
-    return { ...message, type: 'local' }
-  }
-
-  send () {
-    const { message } = this.state
+  send (event) {
+    const { message, whisperTo, mode } = this.state
     const { send, onSend, clearOnSend } = this.props
     //const command = this.parseCommand(message) // TODO no command parsing for now, just chat
-    console.log(message)
+    //console.log(message)
 
-    send(message)
+    if ( 'text' === mode )
+      send({content: message})
+    if ( 'whisper' === mode )
+      send({content: message, to: whisperTo})
+    //if ( 'dice' === mode ) return;
+
     onSend(message)
-    if ( clearOnSend ) this.setState({message: ''})
+    if ( clearOnSend ) {
+      this.setState({message: undefined})
+      this.input.value = null
+      event.preventDefault()
+    }
+  }
+
+  onClickWhisperName () {
+    this.setState({whisperTo: null, mode: 'text'})
   }
 
   render () {
     const { message } = this.state
-    const { defaultValue } = this.props
+    const { placeholder } = this.props
 
     const inputProps = { 
+      ref: el => this.input = el,
       value: message,
-      defaultValue,
+      placeholder,
+      isEmpty: !message || message.length === 0,
       onChange: event => {
-        const {onChange} = this.props
+        const { onChange } = this.props
         this.setState({message: event.target.value})
         onChange(event.target.value)
       },
@@ -81,16 +103,29 @@ class ChatInput extends React.Component {
         onKeyPress(event)
 
         if ( 'Enter' === event.key ) {
+          if ( event.shiftKey ) return;
           if ( !sendOnEnter ) return;
           if ( !message.length ) return;
-          this.send()
+          this.send(event)
         }
       }
     }
+    //console.log(inputProps)
 
-    return <ChatInputBox>
-      <InputField {...inputProps} />
-    </ChatInputBox>
+    return (
+      <React.Fragment>
+        <ActivityTrackerBox>
+          <ActivityTracker>{ "somebody is typing..." }</ActivityTracker>
+          <CurrentTime>{ "22:06 PM" }</CurrentTime>
+        </ActivityTrackerBox>
+        <Box style={{background: colors.main}}>
+          <Dot isActive={'text' === this.state.mode}/>
+          <InputFieldBox>
+            <InputField {...inputProps} />
+          </InputFieldBox>
+        </Box>
+      </React.Fragment>
+    )
   }
 }
 
@@ -101,9 +136,9 @@ ChatInput.defaultProps = {
   send: f => f,
   sendOnEnter: true,
   clearOnSend: true,
-  onHistoryPrevious: f => f,
   onHistoryNext: f => f,
-  defaultValue: 'Talk in #local',
+  onHistoryPrevious: f => f,
+  placeholder: 'Talk in #local',
 }
 
 export default ChatInput

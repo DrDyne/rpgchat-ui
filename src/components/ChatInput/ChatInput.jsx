@@ -115,7 +115,7 @@ class ChatInput extends React.Component {
     return (
       <React.Fragment>
         <ActivityTrackerBox>
-          <ActivityTracker>{ "somebody is typing..." }</ActivityTracker>
+          <ActivityTracker>{ "Player1, GM are writing something..." }</ActivityTracker>
           <CurrentTime>{ "22:06 PM" }</CurrentTime>
         </ActivityTrackerBox>
         <Box style={{background: colors.main}}>

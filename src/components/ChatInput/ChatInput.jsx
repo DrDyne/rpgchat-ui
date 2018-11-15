@@ -80,7 +80,7 @@ class ChatInput extends React.Component {
 
   render () {
     const { message } = this.state
-    const { placeholder } = this.props
+    const { placeholder, currentTime, activity } = this.props
 
     const inputProps = { 
       ref: el => this.input = el,
@@ -115,8 +115,8 @@ class ChatInput extends React.Component {
     return (
       <React.Fragment>
         <ActivityTrackerBox>
-          <ActivityTracker>{ "Player1, GM are writing something..." }</ActivityTracker>
-          <CurrentTime>{ "22:06 PM" }</CurrentTime>
+          <ActivityTracker>{ activity }</ActivityTracker>
+          <CurrentTime>{ currentTime }</CurrentTime>
         </ActivityTrackerBox>
         <Box style={{background: colors.main}}>
           <Dot isActive={'text' === this.state.mode}/>
@@ -139,6 +139,8 @@ ChatInput.defaultProps = {
   onHistoryNext: f => f,
   onHistoryPrevious: f => f,
   placeholder: 'Talk in #local',
+  activity: 'Player1, GM are writing something...',
+  currentTime: '22:06 PM',
 }
 
 export default ChatInput
